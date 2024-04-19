@@ -57,7 +57,7 @@ module Fastlane
         # on linux
         elsif FastlaneCore::Helper.linux?
           sdk_path = File.expand_path(params[:linux_sdk_dir])
-          sdk_manager = File.expand_path("cmdline-tools/bin/sdkmanager", sdk_path)
+          sdk_manager = File.expand_path("cmdline-tools/latest/bin/sdkmanager", sdk_path)
           if File.exist?(sdk_manager)
             UI.message("Using existing android-sdk at #{sdk_path}")
           else
@@ -77,7 +77,10 @@ module Fastlane
         FastlaneCore::CommandExecutor.execute(command: "wget -O /tmp/android-commandlinetools.zip #{download_url}",
                                               print_all: true,
                                               print_command: true)
-        FastlaneCore::CommandExecutor.execute(command: "unzip -qo /tmp/android-commandlinetools.zip -d #{sdk_path}",
+        FastlaneCore::CommandExecutor.execute(command: "unzip -qo /tmp/android-commandlinetools.zip -d #{sdk_path}/cmdline-tools",
+                                              print_all: true,
+                                              print_command: true)
+        FastlaneCore::CommandExecutor.execute(command: "mv #{sdk_path}/cmdline-tools/cmdline-tools #{sdk_path}/cmdline-tools/latest",
                                               print_all: true,
                                               print_command: true)
       ensure
