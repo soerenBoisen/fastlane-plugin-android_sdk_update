@@ -57,7 +57,7 @@ module Fastlane
         # on linux
         elsif FastlaneCore::Helper.linux?
           sdk_path = File.expand_path(params[:linux_sdk_dir])
-          sdk_manager = File.expand_path("tools/bin/sdkmanager", sdk_path)
+          sdk_manager = File.expand_path("cmdline-tools/bin/sdkmanager", sdk_path)
           if File.exist?(sdk_manager)
             UI.message("Using existing android-sdk at #{sdk_path}")
           else
