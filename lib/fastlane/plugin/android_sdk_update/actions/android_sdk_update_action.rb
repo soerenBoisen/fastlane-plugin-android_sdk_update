@@ -77,6 +77,9 @@ module Fastlane
         FastlaneCore::CommandExecutor.execute(command: "wget -O /tmp/android-commandlinetools.zip #{download_url}",
                                               print_all: true,
                                               print_command: true)
+        FastlaneCore::CommandExecutor.execute(command: "mkdir -p #{sdk_path}",
+                                              print_all: true,
+                                              print_command: true)
         FastlaneCore::CommandExecutor.execute(command: "unzip -qo /tmp/android-commandlinetools.zip -d #{sdk_path}/cmdline-tools",
                                               print_all: true,
                                               print_command: true)
