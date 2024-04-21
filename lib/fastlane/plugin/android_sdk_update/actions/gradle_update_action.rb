@@ -16,7 +16,7 @@ module Fastlane
           else
             UI.message("Downloading gradle to #{gradle_path}")
             download_url = "https://services.gradle.org/distributions/gradle-#{gradle_version}-bin.zip"
-            download_and_extract_gradle(download_url, gradle_path)
+            download_and_extract_gradle(download_url, gradle_version, gradle_path)
           end
 
         else
