@@ -2,13 +2,13 @@ module Fastlane
   module Actions
     class GradleUpdateAction < Action
       def self.run(params)
-        gradle_version = params[:gradle_version]
         gradle_sh, gradle_path = determine_gradle(params)
       end
 
       def self.determine_gradle(params)
         # on linux
         if FastlaneCore::Helper.linux?
+          gradle_version = params[:gradle_version]
           gradle_path = File.expand_path(params[:gradle_version], params[:gradle_dir])
           gradle_sh = File.expand_path("bin/gradle", gradle_path)
           if File.exist?(gradle_sh)
