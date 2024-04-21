@@ -9,14 +9,15 @@ module Fastlane
         # on linux
         if FastlaneCore::Helper.linux?
           gradle_version = params[:gradle_version]
-          gradle_path = File.expand_path(params[:gradle_version], params[:gradle_dir])
+          gradle_install_path = File.expand_path(params[:gradle_dir])
+          gradle_path = File.expand_path("gradle-#{gradle_version}", gradle_install_path)
           gradle_sh = File.expand_path("bin/gradle", gradle_path)
           if File.exist?(gradle_sh)
             UI.message("Using existing gradle at #{gradle_path}")
           else
-            UI.message("Downloading gradle to #{gradle_path}")
+            UI.message("Downloading gradle to #{gradle_install_path}")
             download_url = "https://services.gradle.org/distributions/gradle-#{gradle_version}-bin.zip"
-            download_and_extract_gradle(download_url, gradle_version, gradle_path)
+            download_and_extract_gradle(download_url, gradle_version, gradle_install_path)
           end
 
         else
