@@ -13,8 +13,8 @@ module Fastlane
       def self.determine_gradle(params)
         # on linux
         if FastlaneCore::Helper.linux?
-          gradle_home = ENV['GRADLE_HOME']
-          gradle_path = File.expand_path(gradle_home)
+          gradle_dir = params[:gradle_dir]
+          gradle_path = File.expand_path(gradle_dir)
           gradle_sh = File.expand_path("bin/gradle", gradle_path)
           if File.exist?(gradle_sh)
             UI.message("Using existing gradle at #{gradle_path}")
@@ -65,7 +65,12 @@ module Fastlane
                                        env_name: "FL_GRADLE_VERSION",
                                        description: "Gradle version to be installed",
                                        optional: false),
-                                       FastlaneCore::ConfigItem.new(key: :android_project_dir,
+          FastlaneCore::ConfigItem.new(key: :gradle_dir,
+                                       env_name: "FL_GRADLE_DIRECTORY",
+                                       description: "Folder where Gradle is installed",
+                                       optional: true,
+                                       default_value: ENV["GRADLE_HOME"]),
+          FastlaneCore::ConfigItem.new(key: :android_project_dir,
                                        env_name: "FL_ANDROID_PROJECT_DIR",
                                        description: "Subfolder where the android project resides",
                                        optional: false),
