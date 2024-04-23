@@ -4,10 +4,11 @@ module Fastlane
       def self.run(params)
         android_project_dir = params[:android_project_dir]
         gradle_version = params[:gradle_version]
+        validate_url = params[:validate_url]
 
         gradle_sh, gradle_path = determine_gradle(params)
 
-        call_gradle_wrapper(android_project_dir, gradle_sh, gradle_version)
+        call_gradle_wrapper(android_project_dir, gradle_sh, gradle_version, validate_url)
       end
 
       def self.determine_gradle(params)
@@ -29,9 +30,10 @@ module Fastlane
         [gradle_sh, gradle_path]
       end
 
-      def self.call_gradle_wrapper(android_project_dir, gradle_sh, gradle_version)
+      def self.call_gradle_wrapper(android_project_dir, gradle_sh, gradle_version, validate_url)
+        validate_url_param = validate_url ? " --validate-url" else "" end
         Dir.chdir(android_project_dir) do
-          FastlaneCore::CommandExecutor.execute(command: "#{gradle_sh} wrapper --gradle-version #{gradle_version} --validate-url",
+          FastlaneCore::CommandExecutor.execute(command: "#{gradle_sh} wrapper --gradle-version #{gradle_version}#{validate_url_param}",
                                                 print_all: true,
                                                 print_command: true)
         end
@@ -71,9 +73,14 @@ module Fastlane
                                        optional: true,
                                        default_value: ENV["GRADLE_HOME"]),
           FastlaneCore::ConfigItem.new(key: :android_project_dir,
-                                       env_name: "FL_ANDROID_PROJECT_DIR",
+                                       env_name: "FL_GRADLE_ANDROID_PROJECT_DIR",
                                        description: "Subfolder where the android project resides",
                                        optional: false),
+          FastlaneCore::ConfigItem.new(key: :validate_url,
+                                       env_name: "FL_GRADLE_VALIDATE_URL",
+                                       description: "Update all installed packages to the latest versions",
+                                       is_string: false,
+                                       default_value: false),
         ]
       end
 
