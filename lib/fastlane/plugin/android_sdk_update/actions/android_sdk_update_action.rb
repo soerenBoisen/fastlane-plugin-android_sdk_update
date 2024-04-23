@@ -1,5 +1,9 @@
 module Fastlane
   module Actions
+    module SharedValues
+      ANDROID_SDK_HOME = :ANDROID_SDK_HOME
+    end
+
     class AndroidSdkUpdateAction < Action
       def self.run(params)
         # Install Android-SDK via brew
@@ -44,6 +48,8 @@ module Fastlane
           UI.message("Override local.properties")
           JavaProperties.write({ :"sdk.dir" => sdk_path }, "#{Dir.pwd}/local.properties")
         end
+
+        return Actions.lane_context[SharedValues::ANDROID_SDK_HOME] = sdk_path
       end
 
       def self.determine_sdk(params)
@@ -159,6 +165,20 @@ module Fastlane
                                         optional: true,
                                         default_value: "https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip")
         ]
+      end
+
+      def self.output
+        [
+          ["ANDROID_SDK_HOME", "The location of the Android SDK"]
+        ]
+      end
+
+      def self.return_value
+        "The location of the Android SDK"
+      end
+
+      def self.return_type
+        :string
       end
 
       def self.authors

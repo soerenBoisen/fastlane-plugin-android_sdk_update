@@ -71,7 +71,7 @@ module Fastlane
                                        env_name: "FL_GRADLE_DIRECTORY",
                                        description: "Folder where Gradle is installed",
                                        optional: true,
-                                       default_value: ENV["GRADLE_HOME"]),
+                                       default_value: Actions.lane_context[SharedValues::GRADLE_HOME] || ENV["GRADLE_HOME"]),
           FastlaneCore::ConfigItem.new(key: :android_project_dir,
                                        env_name: "FL_GRADLE_ANDROID_PROJECT_DIR",
                                        description: "Subfolder where the android project resides",

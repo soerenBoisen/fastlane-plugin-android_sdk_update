@@ -1,8 +1,18 @@
 module Fastlane
   module Actions
+    module SharedValues
+      GRADLE_HOME = :GRADLE_HOME
+      GRADLE_BIN = :GRADLE_BIN
+    end
+
     class GradleUpdateAction < Action
       def self.run(params)
         gradle_sh, gradle_path = determine_gradle(params)
+
+        Actions.lane_context[SharedValues::GRADLE_HOME] = gradle_path
+        Actions.lane_context[SharedValues::GRADLE_BIN] = gradle_sh
+
+        return gradle_path
       end
 
       def self.determine_gradle(params)
@@ -12,6 +22,7 @@ module Fastlane
           gradle_install_path = File.expand_path(params[:gradle_dir])
           gradle_path = File.expand_path("gradle-#{gradle_version}", gradle_install_path)
           gradle_sh = File.expand_path("bin/gradle", gradle_path)
+
           if File.exist?(gradle_sh)
             UI.message("Using existing gradle at #{gradle_path}")
           else
@@ -24,7 +35,6 @@ module Fastlane
           UI.user_error! 'Your OS is currently not supported.'
         end
 
-        ENV['GRADLE_HOME'] = gradle_path
         [gradle_sh, gradle_path]
       end
 
@@ -78,6 +88,21 @@ module Fastlane
                                         optional: true,
                                         default_value: "~/.gradle-fastlane"),
         ]
+      end
+
+      def self.output
+        [
+          ["GRADLE_HOME", "The install location of gradle"],
+          ["GRADLE_BIN", "The location of the gradle executable"]
+        ]
+      end
+
+      def self.return_value
+        "The install location of gradle"
+      end
+
+      def self.return_type
+        :string
       end
 
       def self.authors
