@@ -31,7 +31,7 @@ module Fastlane
       end
 
       def self.call_gradle_wrapper(android_project_dir, gradle_sh, gradle_version, validate_url)
-        validate_url_param = validate_url ? " --validate-url" else "" end
+        validate_url_param = validate_url ? " --validate-url" : ""
         Dir.chdir(android_project_dir) do
           FastlaneCore::CommandExecutor.execute(command: "#{gradle_sh} wrapper --gradle-version #{gradle_version}#{validate_url_param}",
                                                 print_all: true,
