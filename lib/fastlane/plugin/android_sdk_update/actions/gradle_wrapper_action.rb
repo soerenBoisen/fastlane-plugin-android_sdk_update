@@ -12,8 +12,8 @@ module Fastlane
       end
 
       def self.determine_gradle(params)
-        # on linux
-        if FastlaneCore::Helper.linux?
+        # on linux / macOS
+        if FastlaneCore::Helper.linux? || FastlaneCore::Helper.mac?
           gradle_dir = params[:gradle_dir]
           gradle_path = File.expand_path(gradle_dir)
           gradle_sh = File.expand_path("bin/gradle", gradle_path)
