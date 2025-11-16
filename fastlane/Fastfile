@@ -1,4 +1,6 @@
 lane :test do
+  gradle_update(gradle_version: "8.4")
+
   android_sdk_update(
     compile_sdk_version: "27",
     build_tools_version: "27.0.2",
