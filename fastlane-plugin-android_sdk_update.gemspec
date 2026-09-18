@@ -1,4 +1,4 @@
-lib = File.expand_path("../lib", __FILE__)
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'fastlane/plugin/android_sdk_update/version'
 
@@ -11,6 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'Install required Android-SDK packages'
   spec.homepage      = "https://github.com/NovaTecConsulting/fastlane-plugin-android_sdk_update"
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 3.4.2'
 
   spec.files         = Dir["lib/**/*"] + %w(README.md LICENSE)
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})

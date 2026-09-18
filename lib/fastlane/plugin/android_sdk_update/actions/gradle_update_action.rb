@@ -88,7 +88,7 @@ module Fastlane
 
       def self.details
         [
-          "The initial Gradle will be downloaded as zip archive.",
+          "The initial Gradle will be downloaded as zip archive."
         ].join("\n")
       end
 
@@ -107,20 +107,20 @@ module Fastlane
                                        description: "Gradle version to be installed",
                                        optional: false),
           FastlaneCore::ConfigItem.new(key: :gradle_dir,
-                                        env_name: "FL_GRADLE_DIR",
-                                        description: "Directory for Gradle",
-                                        optional: true,
-                                        default_value: "~/.gradle-fastlane"),
+                                       env_name: "FL_GRADLE_DIR",
+                                       description: "Directory for Gradle",
+                                       optional: true,
+                                       default_value: "~/.gradle-fastlane"),
           FastlaneCore::ConfigItem.new(key: :download_tool_linux,
-                                        env_name: "FL_DOWNLOAD_TOOL_LINUX",
-                                        description: "Tool to download files in linux",
-                                        optional: true,
-                                        default_value: "wget"),
+                                       env_name: "FL_DOWNLOAD_TOOL_LINUX",
+                                       description: "Tool to download files in linux",
+                                       optional: true,
+                                       default_value: "wget"),
           FastlaneCore::ConfigItem.new(key: :download_tool_macos,
-                                        env_name: "FL_DOWNLOAD_TOOL_MACOS",
-                                        description: "Tool to download files in macOS",
-                                        optional: true,
-                                        default_value: "curl"),
+                                       env_name: "FL_DOWNLOAD_TOOL_MACOS",
+                                       description: "Tool to download files in macOS",
+                                       optional: true,
+                                       default_value: "curl")
         ]
       end
 

@@ -6,7 +6,7 @@ module Fastlane
         gradle_version = params[:gradle_version]
         validate_url = params[:validate_url]
 
-        gradle_sh, gradle_path = determine_gradle(params)
+        gradle_sh, = determine_gradle(params)
 
         call_gradle_wrapper(android_project_dir, gradle_sh, gradle_version, validate_url)
       end
@@ -49,7 +49,7 @@ module Fastlane
 
       def self.details
         [
-          "Uses the gradle in GRADLE_HOME.",
+          "Uses the gradle in GRADLE_HOME."
         ].join("\n")
       end
 
@@ -80,7 +80,7 @@ module Fastlane
                                        env_name: "FL_GRADLE_VALIDATE_URL",
                                        description: "Update all installed packages to the latest versions",
                                        is_string: false,
-                                       default_value: false),
+                                       default_value: false)
         ]
       end
 

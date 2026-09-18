@@ -40,12 +40,12 @@ module Fastlane
         # Accept licenses for all available packages
         UI.important("Accepting licenses on your behalf!")
         FastlaneCore::CommandExecutor.execute(command: "yes | #{sdk_manager} --licenses",
-                                               print_all: true,
-                                               print_command: false)
+                                              print_all: true,
+                                              print_command: false)
 
         if params[:override_local_properties]
           UI.message("Override local.properties")
-          JavaProperties.write({ :"sdk.dir" => sdk_path }, "#{Dir.pwd}/local.properties")
+          JavaProperties.write({ "sdk.dir": sdk_path }, "#{Dir.pwd}/local.properties")
         end
 
         return Actions.lane_context[SharedValues::ANDROID_SDK_HOME] = sdk_path
@@ -154,15 +154,15 @@ module Fastlane
                                        is_string: false,
                                        default_value: false),
           FastlaneCore::ConfigItem.new(key: :linux_sdk_dir,
-                                        env_name: "FL_ANDROID_LINUX_SDK_DIR",
-                                        description: "Directory for Android SDK on Linux",
-                                        optional: true,
-                                        default_value: ENV['ANDROID_HOME'] || ENV['ANDROID_SDK'] || ENV['ANDROID_SDK_ROOT'] || "~/.android-sdk"),
+                                       env_name: "FL_ANDROID_LINUX_SDK_DIR",
+                                       description: "Directory for Android SDK on Linux",
+                                       optional: true,
+                                       default_value: ENV['ANDROID_HOME'] || ENV['ANDROID_SDK'] || ENV['ANDROID_SDK_ROOT'] || "~/.android-sdk"),
           FastlaneCore::ConfigItem.new(key: :linux_sdk_download_url,
-                                        env_name: "FL_ANDROID_LINUX_SDK_DOWNLOAD_URL",
-                                        description: "Download URL for Android SDK on Linux",
-                                        optional: true,
-                                        default_value: "https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip")
+                                       env_name: "FL_ANDROID_LINUX_SDK_DOWNLOAD_URL",
+                                       description: "Download URL for Android SDK on Linux",
+                                       optional: true,
+                                       default_value: "https://dl.google.com/android/repository/commandlinetools-linux-8512546_latest.zip")
         ]
       end
 
