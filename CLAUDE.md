@@ -27,7 +27,9 @@ There is no separate lint/build step beyond rubocop; `rake` (spec + rubocop) is 
 
 ## Versioning
 
-This project follows [semantic versioning](https://semver.org) (MAJOR.MINOR.PATCH). Every fix or feature change to this plugin must bump `VERSION` in `lib/fastlane/plugin/android_sdk_update/version.rb` as part of the same change — bump the patch digit for backwards-compatible fixes, the minor digit for backwards-compatible features, the major digit for breaking changes. Do this automatically; don't wait to be asked.
+This project follows [semantic versioning](https://semver.org) (MAJOR.MINOR.PATCH). Every fix or feature change to this plugin must bump `VERSION` in `lib/fastlane/plugin/android_sdk_update/version.rb` as part of the same change — bump the patch digit for backwards-compatible fixes, the minor digit for backwards-compatible features, the major digit for breaking changes. Do this automatically; don't wait to be asked. Doc-only changes (e.g. README) don't need a version bump.
+
+See the "Publishing a new release" section in `README.md` for the git-based release flow (this fork isn't published to RubyGems).
 
 ## Architecture
 
