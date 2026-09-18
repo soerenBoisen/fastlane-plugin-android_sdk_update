@@ -18,7 +18,6 @@ module Fastlane
         packages = params[:additional_packages]
         packages << "platforms;android-#{sdk_version}"
         packages << "build-tools;#{tools_version}"
-        packages << "tools"
         packages << "platform-tools"
 
         # Install Packages
